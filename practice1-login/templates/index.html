@@ -1,0 +1,54 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title> Index </title>
+        <title>Upload and display image</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />        
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+        <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">                     
+    </head>
+    <body></br></br></br></br></br>
+        <div align="center" style="background-image: url('./static/images/112097.jpg');">
+          <div align="center" class="border">
+             <div class="header" >
+             </div></br></br></br>
+                <h1 class="bottom">
+                     Hi {{session.username}}!!</br></br> Welcome to the index page...                 
+                </h1></br></br></br>
+                <a href="{{ url_for('logout') }}" class="btn">Logout</a>
+          </div>
+        </div>
+
+        <div class="container2">
+        <div class="row">
+            <h2>Upload image</h2>
+            <p>
+                {% with messages = get_flashed_messages() %}
+                  {% if messages %}
+                    <ul>
+                    {% for message in messages %}
+                      <li>{{ message }}</li>
+                    {% endfor %}
+                    </ul>
+                  {% endif %}
+                {% endwith %}
+            </p>
+            {% if filename %}
+                <div>
+                    <img src="{{ url_for('display_image', filename=filename) }}">
+                </div>
+            {% endif %}
+            <form method="post" action="/" enctype="multipart/form-data">
+                <dl>
+                    <p>
+                        <input type="file" name="file" class="form-control" autocomplete="off" required>
+                    </p>
+                </dl>
+                <p>
+                    <input type="submit" value="Submit" class="btn btn-info" style="position: absolute; left:30%; color: black">
+                </p>
+            </form>
+        </div>
+        </div>
+    </body>
+</html>
